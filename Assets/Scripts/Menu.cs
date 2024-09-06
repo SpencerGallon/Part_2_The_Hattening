@@ -20,13 +20,11 @@ public class Menu : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        // disable the buttons at the start as we're not connected to the server yet
+
         createRoomButton.interactable = false;
         joinRoomButton.interactable = false;
     }
 
-    // called when we connect to the master server
-    // enables the "Create Room" and "Join Room" buttons
     public override void OnConnectedToMaster()
     {
         createRoomButton.interactable = true;
@@ -35,11 +33,11 @@ public class Menu : MonoBehaviourPunCallbacks
 
     void SetScreen(GameObject screen)
     {
-        // deactivate all screens
+
         mainScreen.SetActive(false);
         lobbyScreen.SetActive(false);
 
-        // enable the requested screen
+
         screen.SetActive(true);
     }
 
@@ -69,13 +67,12 @@ public class Menu : MonoBehaviourPunCallbacks
     {
         playerListText.text = "";
 
-        // display all the players currently in the lobby
+   
         foreach (Player player in PhotonNetwork.PlayerList)
         {
             playerListText.text += player.NickName + "\n";
         }
 
-        // only the host can start the game
         startGameButton.interactable = PhotonNetwork.IsMasterClient;
     }
 
